@@ -1,6 +1,15 @@
 import time
 import random
-from utils import *
+from utils import (
+    BLACK,
+    WHITE,
+    EMPTY,
+    get_opponent,
+    make_move,
+    traduction_move,
+    forms_square,
+    forms_corners,
+)
 
 
 def terminal_test(board, player):

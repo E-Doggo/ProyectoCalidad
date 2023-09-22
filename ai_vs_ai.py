@@ -146,7 +146,7 @@ def AlphaBetaPrunningDepth1(state, depth, alpha, beta, maximizing_player, availa
 
     if depth == 0 or (terminal_test(state[0], BLACK) > 0) or (terminal_test(state[0], WHITE) > 0):
         return first_evaluation_function(state), 0, counter
-#       return first_evaluation_function(state), 0, counter
+
 
     if maximizing_player:
         max_value = float('-inf')
@@ -188,7 +188,7 @@ def AlphaBetaPrunningDepth2(state, depth, alpha, beta, maximizing_player, availa
 
     if depth == 0 or (terminal_test(state[0], BLACK) > 0) or (terminal_test(state[0], WHITE) > 0):
         return second_evaluation_function(state), 0, counter
-#       return first_evaluation_function(state), 0, counter
+
 
     if maximizing_player:
         max_value = float('-inf')

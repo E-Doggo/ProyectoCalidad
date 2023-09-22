@@ -12,6 +12,7 @@ from utils import (
 )
 
 
+
 def terminal_test(board, player):
 
     for i in range(4):

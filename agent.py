@@ -2,7 +2,7 @@
 # Define the player colors
 from utils import *
 
-
+#Move to utils
 def terminal_test(board, player):
 
     for i in range(4):
@@ -23,7 +23,7 @@ def terminal_test(board, player):
 
     return False
 
-
+#Move to utils
 def find_adjacencies(board):
     adjecencies = {BLACK:0, WHITE:0}
     values = {BLACK:1, WHITE:-1}
@@ -34,12 +34,12 @@ def find_adjacencies(board):
         for j in range(3):
                 for offset_i, offset_j in offsets:
                     color = board[i + offset_i][j + offset_j]
-                    if 0 <= i + offset_i < 3 and 0 <= j + offset_j < 3 and color != EMPTY: 
+                    if 0 <= i + offset_i < 3 and 0 <= j + offset_j < 3 and color != EMPTY and color != None: 
                         adjecencies[color] += values[color]
 
     return adjecencies[BLACK], adjecencies[WHITE]
 
-
+#Move to utils
 def second_evaluation_function(state):
     board = state[0]
     weights = [[3, 2, 2, 3],
@@ -61,7 +61,7 @@ def second_evaluation_function(state):
     value = (player1_score-adj1) - (player2_score-adj2)
     return value
 
-
+#Move to utils
 def get_all_moves(board, player):
     """
     Returns all available moves for a given player on the current board.
@@ -82,7 +82,7 @@ def get_all_moves(board, player):
 
     return moves
 
-
+#Move to utils
 def first_evaluation_function(state):
     board = state[0]
 

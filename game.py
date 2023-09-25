@@ -105,7 +105,7 @@ def is_possible_move(direction, row, col, board, player):
     return True
 
 
-def get_computer_move(state):
+def get_computer_move(state,eva_type):
     board = state[0]
     player = state[1]
     available_moves = []
@@ -126,7 +126,7 @@ def get_computer_move(state):
 
     max_depth = 3
     _, best_move, counter = AlphaBetaPrunningDepth(state, max_depth, float(
-        '-inf'), float('inf'), True, available_moves, counter)
+        '-inf'), float('inf'), True, available_moves, counter, eva_type)
     print("Number of states expanded: ", counter)
     return best_move
 
@@ -180,7 +180,7 @@ def play_game():
             while (mov_valido == False):
                 mov_valido, move = get_user_move(state)
         else:
-            move = get_computer_move(state)
+            move = get_computer_move(state,1)
             print("Computer's move: ", move)
 
         try:

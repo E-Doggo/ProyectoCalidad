@@ -109,25 +109,25 @@ def first_evaluation_function(state):
     return value
 
 
-def AlphaBetaPrunningDepth(state, depth, alpha, beta, maximizing_player, available_moves, counter):
+def AlphaBetaPrunningDepth(state, depth, alpha, beta, maximizing_player, available_moves, counter, eva_type):
     board = state[0]
     player = state[1]
     counter += 1
     best_move = None
+    evaluations={1:first_evaluation_function, 2:second_evaluation_function}
 
     val = float('inf')
     if maximizing_player:
         val = float('-inf')
 
     if depth == 0 or (terminal_test(state[0], BLACK) > 0) or (terminal_test(state[0], WHITE) > 0):
-        return second_evaluation_function(state), 0, counter
-#       return first_evaluation_function(state), 0, counter
+        return evaluations[eva_type](state), 0, counter
 
     for move in available_moves:
         new_board = make_move(board, move, player)
         new_state = [new_board, get_opponent(player)]
         new_value, _, counter = AlphaBetaPrunningDepth(new_state, depth-1, alpha,
-                                                beta, not maximizing_player, available_moves, counter)
+                                                beta, not maximizing_player, available_moves, counter,eva_type)
         if maximizing_player:
             if new_value > val:
                 val = new_value

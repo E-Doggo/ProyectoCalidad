@@ -238,7 +238,9 @@ def play_game_no_cutoff():
     print('Game over! Winner: ', get_opponent(player))
 
 
-play_game()
+if __name__ == "__main__":
+    play_game()
 """ 
-play_game_no_cutoff()
+if __name__ == "__main__":
+    play_game_no_cutoff()
 """

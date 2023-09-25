@@ -1,6 +1,7 @@
 
 # Define the player colors
 from utils import *
+import copy
 
 #Move to utils
 def terminal_test(board, player):

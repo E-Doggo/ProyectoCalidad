@@ -73,17 +73,7 @@ def get_all_moves(board, player):
                 # Check if the move would create a winning line
                 temp_board = copy.deepcopy(board)
                 temp_board[i][j] = player
-                if terminal_test(temp_board, player) > 0:
-                    moves.append((i, j))
-                    continue
-
-                # Check if the move would create a square
-                if forms_square(temp_board, player):
-                    moves.append((i, j))
-                    continue
-
-                # Check if the move would create a tile in every corner
-                if forms_corners(temp_board, player):
+                if terminal_test(temp_board, player) > 0 or forms_square(temp_board, player) or forms_corners(temp_board, player):
                     moves.append((i, j))
                     continue
 

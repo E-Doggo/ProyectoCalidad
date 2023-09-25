@@ -41,22 +41,12 @@ def check_win(board, player):
     return False
 # Define the function for displaying the game board
 
-
 def display_board(board):
     print('   A   B   C   D')
-    print('1  {} | {} | {} | {}'.format(
-        board[0][0] or ' ', board[0][1] or ' ', board[0][2] or ' ', board[0][3] or ' '))
-    print('  ---|---|---|---')
-    print('2  {} | {} | {} | {}'.format(
-        board[1][0] or ' ', board[1][1] or ' ', board[1][2] or ' ', board[1][3] or ' '))
-    print('  ---|---|---|---')
-    print('3  {} | {} | {} | {}'.format(
-        board[2][0] or ' ', board[2][1] or ' ', board[2][2] or ' ', board[2][3] or ' '))
-    print('  ---|---|---|---')
-    print('4  {} | {} | {} | {}'.format(
-        board[3][0] or ' ', board[3][1] or ' ', board[3][2] or ' ', board[3][3] or ' '))
-
-# Define the function for getting user input for the move
+    for i in range(4):
+        row = '{}  {} | {} | {} | {}'.format(i + 1, *(board[i][j] or ' ' for j in range(4)))
+        separator = '  ---|---|---|---' if i < 3 else ''
+        print(row + '\n'+separator)
 
 
 def get_user_move(state):

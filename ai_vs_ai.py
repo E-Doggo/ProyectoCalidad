@@ -1,6 +1,6 @@
 import time
 import random
-from utils import *
+from utils import make_move, get_opponent, BLACK, WHITE, EMPTY
 from game import create_board, check_win, display_board, get_computer_move
 
 

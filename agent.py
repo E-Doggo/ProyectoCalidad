@@ -1,6 +1,6 @@
 
 # Define the player colors
-from utils import *
+from utils import make_move, get_opponent, BLACK, WHITE, EMPTY
 import copy
 
 #Move to utils

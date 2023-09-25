@@ -4,7 +4,7 @@ WHITE = 'W'
 EMPTY = ' '
 
 
-def traduction_move(move):
+def traduction_move(move):#no
     col = ord(move[0]) - ord('A')
     row = int(move[1]) - 1
     direction = move[3:]
@@ -20,7 +20,7 @@ def get_opponent(player):
 
 # Define the function for making a move on the board
 
-def directions_to_move(direction, new_board, row_copy, col_copy, previous_position, player):
+def directions_to_move(direction, new_board, row_copy, col_copy, previous_position, player):#no
     if direction == 'NW':
         for n in range(1, min(row_copy+1, col_copy+1)+1):
             if row_copy-n >= 0 and col_copy >= 0:

@@ -6,7 +6,7 @@ from utils import *
 
 
 def create_board():
-    board = [[None for j in range(4)] for i in range(4)]
+    board = [[None for _ in range(4)] for _ in range(4)]
     board[0][0] = 'B'
     board[0][3] = 'W'
     board[1][1] = 'B'
@@ -56,7 +56,7 @@ def get_user_move(state):
     while True:
         try:
             move_str = input('Enter your move (e.g., C2 SE): ')
-            col, row, dir = traduction_move(move_str.upper())
+            col, row, _ = traduction_move(move_str.upper())
             if board[col][row] == None or board[col][row] == get_opponent(player):
                 return False, 0
             return True, move_str.upper()
@@ -155,12 +155,6 @@ def play_game():
                 "Choose your color ('B' for Black, 'W' for White): ").upper()
         except ValueError:
             print('Invalid input. Please try again.')
-
-    if human_player == BLACK:
-        computer_player = WHITE
-    else:
-        computer_player = BLACK
-
     player = WHITE  # set player to always be black
     state = (board, player)
 

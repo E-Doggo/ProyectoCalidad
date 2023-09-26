@@ -1,6 +1,6 @@
 
 # Define the player colors
-from utils import make_move, get_opponent, BLACK, WHITE, EMPTY
+from utils import make_move, get_opponent, BLACK, WHITE, EMPTY, forms_corners, forms_square
 import copy
 
 #Move to utils
@@ -110,7 +110,7 @@ def first_evaluation_function(state):
     return value
 
 
-def AlphaBetaPrunningDepth(state, depth, alpha, beta, maximizing_player, available_moves, counter, eva_type):
+def alpha_beta_prunning_depth(state, depth, alpha, beta, maximizing_player, available_moves, counter, eva_type):
     board = state[0]
     player = state[1]
     counter += 1
@@ -127,7 +127,7 @@ def AlphaBetaPrunningDepth(state, depth, alpha, beta, maximizing_player, availab
     for move in available_moves:
         new_board = make_move(board, move, player)
         new_state = [new_board, get_opponent(player)]
-        new_value, _, counter = AlphaBetaPrunningDepth(new_state, depth-1, alpha,
+        new_value, _, counter = alpha_beta_prunning_depth(new_state, depth-1, alpha,
                                                 beta, not maximizing_player, available_moves, counter,eva_type)
         if maximizing_player:
             if new_value > val:

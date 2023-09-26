@@ -15,7 +15,7 @@ def utility(state):
         return 0
 
 
-def AlphaBetaPrunning(state, alpha, beta, maximizing_player, available_moves):
+def alpha_beta_prunning(state, alpha, beta, maximizing_player, available_moves):
     board = state[0]
     player = state[1]
 
@@ -25,7 +25,7 @@ def AlphaBetaPrunning(state, alpha, beta, maximizing_player, available_moves):
     for move in available_moves:
         new_board = make_move(board, move, player)
         new_state = [new_board, get_opponent(player)]
-        new_value, _ = AlphaBetaPrunning(new_state, alpha,
+        new_value, _ = alpha_beta_prunning(new_state, alpha,
                                                 beta, not maximizing_player, available_moves)
         if maximizing_player:
             if new_value > val:

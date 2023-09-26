@@ -40,3 +40,4 @@ def AlphaBetaPrunning(state, alpha, beta, maximizing_player, available_moves):
         if beta <= alpha:
                 break
     return val, best_move
+

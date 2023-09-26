@@ -2,7 +2,7 @@ import time
 import random
 from agent import AlphaBetaPrunningDepth
 from agent_no_cutoff import AlphaBetaPrunning
-from utils import *
+from utils import make_move, get_opponent,traduction_move, BLACK, WHITE, EMPTY
 
 
 def create_board():

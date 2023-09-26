@@ -12,11 +12,6 @@ def play_ai_game():
 
     a1 = choose_starting_player()
 
-    if a1 == BLACK:
-        a2 = WHITE
-    else:
-        a2 = BLACK
-
     player = BLACK  # set player to always be black
     state = (board, player)
     move = None

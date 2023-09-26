@@ -2,13 +2,15 @@ import time
 import random
 from utils import make_move, get_opponent, BLACK, WHITE, EMPTY
 from game import create_board, check_win, display_board, get_computer_move
-
+import secrets
+def choose_starting_player():
+    return secrets.choice([BLACK, WHITE])
 
 def play_ai_game():
     board = create_board()
     display_board(board)
 
-    a1 = random.choice([BLACK, WHITE])
+    a1 = choose_starting_player()
 
     if a1 == BLACK:
         a2 = WHITE

@@ -1,2 +1,3 @@
-./.scannerwork/
-./__pycache__/
+.scannerwork/
+__pycache__/
+.pytest_cache

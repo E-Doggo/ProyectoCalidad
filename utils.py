@@ -126,10 +126,9 @@ def make_move(board, move, player):
     row, col, direction = traduction_move(move)
     row_copy, col_copy = row, col
     previous_position = [row_copy, col_copy]
-
-    if row_copy < 0 or row_copy > 3 or col_copy < 0 or col_copy > 3:
-        raise ValueError(
-            "Invalid move: position out of range ")
+    print(row_copy, col_copy)
+    if  (0 < row_copy < 3)  or (0 < col_copy < 3):
+        raise ValueError("Invalid move: position out of range")
 
     new_board = [row[:] for row in board]
 
@@ -181,3 +180,5 @@ def forms_square(board, player):
         return True
 
     return False
+
+

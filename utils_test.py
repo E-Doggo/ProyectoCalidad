@@ -51,3 +51,18 @@ def test_forms_corners_all_corners(empty_board, player_white):
     board[3][3] = player
     result = forms_corners(board, player)
     assert result == True
+
+def test_make_move_succesfully(empty_board, player_black):
+    move_selected = "A1 S"
+    resulting_board = make_move(empty_board, move_selected ,player_black)
+    assert resulting_board == [[None, None, None, None], [None, None, None, None], [None, None, None, None], ['B', None, None, None]]
+
+def test_make_move_failed_first_condition(empty_board, player_black):
+    move_selected = "B7 N"
+    with pytest.raises(ValueError):
+        make_move(empty_board, move_selected, player_black)
+
+def test_make_move_failed_second_condition(empty_board, player_black):
+    move_selected = "E2 N"
+    with pytest.raises(ValueError):
+        make_move(empty_board, move_selected, player_black)

@@ -49,3 +49,24 @@ def test_check_win_4(empty_board):
     board = empty_board
     result = check_win(board, BLACK)
     assert result == False
+
+def test_display_board(capsys):
+    sample_board = create_board()
+    display_board(sample_board)
+
+    captured = capsys.readouterr()
+
+    expected_output = (
+    "   A   B   C   D"
+    "1  B |   |   | W"
+    "  ---|---|---|---"
+    "2    | B | W |  "
+    "  ---|---|---|---"
+    "3    | W | B |  "
+    "  ---|---|---|---"
+    "4  W |   |   | B"
+    )
+
+    expected_output = captured.out
+
+    assert captured.out == expected_output

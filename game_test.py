@@ -16,6 +16,16 @@ def create_state():
     yield state
     state = None
 
+@pytest.fixture
+def create_state_with_empty_board(empty_board):
+    board = empty_board
+    player = BLACK
+    state = [board, player]
+    yield state
+    state = None
+
+
+
 def test_create_board():
     board = create_board()
     assert board == [['B',None,None,'W'],[None,'B', 'W', None],[None, 'W', 'B', None],['W', None, None, 'B']]
@@ -83,6 +93,23 @@ def test_get_user_move_valid_move(create_state, capsys, monkeypatch):
 
     assert result == (True, 'A1 S')
 
+def test_is_possible_move_true(create_state):
+    state = create_state
+    row, column, direction = traduction_move('A1 S')
+    result = is_possible_move(direction, row, column, state[0], state[1])
+    assert result == True
+
+def test_is_possible_move_false_1(create_state):
+    state = create_state
+    row, column, direction = traduction_move('B2 E')
+    result = is_possible_move(direction, row, column, state[0], state[1])
+    assert result == False
+
+def test_is_possible_move_false_2(create_state):
+    state = create_state
+    row, column, direction = traduction_move('D1 N')
+    result = is_possible_move(direction, row, column, state[0], state[1])
+    assert result == False
 
 
 def test_get_user_move_invalid_move(create_state, capsys, monkeypatch):
@@ -115,3 +142,13 @@ def test_get_computer_move(create_state):
     result = get_computer_move(state, 1)
 
     assert result == 'B2 N'
+
+def test_get_computer_move(create_state_with_empty_board):
+    state = create_state_with_empty_board
+    
+    result = get_computer_move(state, 1)
+
+    assert result == None
+
+
+

@@ -3,6 +3,7 @@ import random
 from agent import alpha_beta_prunning_depth
 from agent_no_cutoff import alpha_beta_prunning
 from utils import make_move, get_opponent,traduction_move, BLACK, WHITE, EMPTY
+from itertools import product
 
 
 def create_board():
@@ -94,43 +95,45 @@ def is_possible_move(direction, row, col, board, player):
 
 
 
-def get_computer_move(state,eva_type):
+
+
+def get_computer_move(state, eva_type):
     board = state[0]
     player = state[1]
     available_moves = []
     counter = 0
 
-    for i in range(4):
-        for j in range(4):
-            if board[i][j] == player:
-                for direction in ['N', 'S', 'E', 'W', 'NW', 'NE', 'SW', 'SE']:
+    directions = ['N', 'S', 'E', 'W', 'NW', 'NE', 'SW', 'SE']
 
-                    move = f"{chr(ord('A') + j)}{i+1} {direction}"
-                    row, col, direction = traduction_move(move)
-                    if (is_possible_move(direction, row, col, board, player)):
-                        available_moves.append(move)
+    for i, j, direction in product(range(4), range(4), directions):
+        if board[i][j] == player:
+            move = f"{chr(ord('A') + j)}{i+1} {direction}"
+            row, col, direction = traduction_move(move)
+            if is_possible_move(direction, row, col, board, player):
+                available_moves.append(move)
 
     if not available_moves:
         return None
 
     max_depth = 3
-    _, best_move, counter = alpha_beta_prunning_depth(state, max_depth, float(
-        '-inf'), float('inf'), True, available_moves, counter, eva_type)
+    _, best_move, counter = alpha_beta_prunning_depth(state, max_depth, float('-inf'), float('inf'), True, available_moves, counter, eva_type)
     print("Number of states expanded: ", counter)
     return best_move
+
 
 
 def get_computer_move_no_cutoff(state):
     board = state[0]
     player = state[1]
     available_moves = []
+    directions = ['N', 'S', 'E', 'W', 'NW', 'NE', 'SW', 'SE']
 
-    for i in range(4):
-        for j in range(4):
-            if board[i][j] == player:
-                for direction in ['N', 'S', 'E', 'W', 'NW', 'NE', 'SW', 'SE']:
-                    move = f"{chr(ord('A') + j)}{i+1} {direction}"
-                    available_moves.append(move)
+    for i, j, direction in product(range(4), range(4), directions):
+        if board[i][j] == player:
+            move = f"{chr(ord('A') + j)}{i+1} {direction}"
+            row, col, direction = traduction_move(move)
+            if is_possible_move(direction, row, col, board, player):
+                available_moves.append(move)
 
     if not available_moves:
         return None

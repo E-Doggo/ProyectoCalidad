@@ -10,7 +10,6 @@ def traduction_move(move):#no
     direction = move[3:]
     return row, col, direction
 
-
 def get_opponent(player):
     if player == BLACK:
         return WHITE
@@ -126,9 +125,10 @@ def make_move(board, move, player):
     row, col, direction = traduction_move(move)
     row_copy, col_copy = row, col
     previous_position = [row_copy, col_copy]
-    
-    if  (3 < row_copy < 0)  or (3 < col_copy < 0):
-        raise ValueError("Invalid move: position out of range")
+
+    if row_copy < 0 or row_copy > 3 or col_copy < 0 or col_copy > 3:
+        raise ValueError(
+            "Invalid move: position out of range ")
 
     new_board = [row[:] for row in board]
 
@@ -180,5 +180,3 @@ def forms_square(board, player):
         return True
 
     return False
-
-

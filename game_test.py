@@ -86,6 +86,34 @@ def test_display_board_failure():
     with pytest.raises(TypeError):
         display_board()
 
+
+
+def test_is_possible_move_true(create_state):
+    state = create_state
+    row, column, direction = traduction_move('A1 S')
+    result = is_possible_move(direction, row, column, state[0], state[1])
+    assert result == True
+
+def test_is_possible_move_false_1(create_state):
+    state = create_state
+    row, column, direction = traduction_move('D1 N')
+    result = is_possible_move(direction, row, column, state[0], state[1])
+    assert result == False
+
+
+def test_is_possible_move_false_2(create_state):
+    state = create_state
+    row, column, direction = traduction_move('F1 E')
+    result = is_possible_move(direction, row, column, state[0], state[1])
+    assert result == False
+
+
+def test_is_possible_move_false_4(create_state):
+    state = create_state
+    row, column, direction = traduction_move('A5 N')
+    result = is_possible_move(direction, row, column, state[0], state[1])
+    assert result == False
+
 def test_get_user_move_valid_move(create_state, capsys, monkeypatch):
     state = create_state
 
@@ -97,25 +125,6 @@ def test_get_user_move_valid_move(create_state, capsys, monkeypatch):
         result = get_user_move(state)
 
     assert result == (True, 'A1 S')
-
-def test_is_possible_move_true(create_state):
-    state = create_state
-    row, column, direction = traduction_move('A1 S')
-    result = is_possible_move(direction, row, column, state[0], state[1])
-    assert result == True
-
-def test_is_possible_move_false_1(create_state):
-    state = create_state
-    row, column, direction = traduction_move('B2 E')
-    result = is_possible_move(direction, row, column, state[0], state[1])
-    assert result == False
-
-def test_is_possible_move_false_2(create_state):
-    state = create_state
-    row, column, direction = traduction_move('D1 N')
-    result = is_possible_move(direction, row, column, state[0], state[1])
-    assert result == False
-
 
 def test_get_user_move_invalid_move(create_state, capsys, monkeypatch):
     state = create_state

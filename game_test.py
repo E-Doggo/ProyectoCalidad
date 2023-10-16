@@ -60,7 +60,7 @@ def test_check_win_4(empty_board):
     result = check_win(board, BLACK)
     assert result == False
 
-def test_display_board(capsys):
+def test_display_board_success(capsys):
     sample_board = create_board()
     display_board(sample_board)
 
@@ -75,11 +75,16 @@ def test_display_board(capsys):
     "3    | W | B |  "
     "  ---|---|---|---"
     "4  W |   |   | B"
+    "  ---|---|---|---"
     )
 
     expected_output = captured.out
 
     assert captured.out == expected_output
+    
+def test_display_board_failure():
+    with pytest.raises(TypeError):
+        display_board()
 
 def test_get_user_move_valid_move(create_state, capsys, monkeypatch):
     state = create_state

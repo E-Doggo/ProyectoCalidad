@@ -33,20 +33,18 @@ def check_win(board, player):
     if board[0][0] == player and board[0][3] == player and board[3][0] == player and board[3][3] == player:
         return True
 
-    for i in range(3):
-        for j in range(3):
-            if board[i][j] == player and board[i][j+1] == player and board[i+1][j] == player and board[i+1][j+1] == player:
-                return True
-
     return False
 # Define the function for displaying the game board
 
 def display_board(board):
-    print('   A   B   C   D')
-    for i in range(4):
-        row = '{}  {} | {} | {} | {}'.format(i + 1, *(board[i][j] or ' ' for j in range(4)))
-        separator = '  ---|---|---|---' if i < 3 else ''
-        print(row + '\n'+separator)
+    try:
+        print('   A   B   C   D')
+        for i in range(4):
+            row = '{}  {} | {} | {} | {}'.format(i + 1, *(board[i][j] or ' ' for j in range(4)))
+            separator = '  ---|---|---|---'
+            print(row + '\n'+separator) 
+    except ValueError:
+        "Argument must not be empty"
 
 
 def get_user_move(state):

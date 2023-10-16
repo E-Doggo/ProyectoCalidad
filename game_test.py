@@ -70,3 +70,48 @@ def test_display_board(capsys):
     expected_output = captured.out
 
     assert captured.out == expected_output
+
+def test_get_user_move_valid_move(create_state, capsys, monkeypatch):
+    state = create_state
+
+    user_input = "A1 S"
+
+    monkeypatch.setattr('builtins.input', lambda _: user_input)
+
+    with capsys.disabled():
+        result = get_user_move(state)
+
+    assert result == (True, 'A1 S')
+
+
+
+def test_get_user_move_invalid_move(create_state, capsys, monkeypatch):
+    state = create_state
+
+    user_input = "A2 E"
+
+    monkeypatch.setattr('builtins.input', lambda _: user_input)
+    
+    with capsys.disabled():
+        result = get_user_move(state)
+
+    assert result == (False, 0)
+
+def test_get_user_move_wrong_piece(create_state, capsys, monkeypatch):
+    state = create_state
+
+    user_input = "D1 S"
+
+    monkeypatch.setattr('builtins.input', lambda _: user_input)
+    
+    with capsys.disabled():
+        result = get_user_move(state)
+
+    assert result == (False, 0)  
+
+def test_get_computer_move(create_state):
+    state = create_state
+    
+    result = get_computer_move(state, 1)
+
+    assert result == 'B2 N'

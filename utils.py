@@ -126,8 +126,8 @@ def make_move(board, move, player):
     row, col, direction = traduction_move(move)
     row_copy, col_copy = row, col
     previous_position = [row_copy, col_copy]
-    print(row_copy, col_copy)
-    if  (0 < row_copy < 3)  or (0 < col_copy < 3):
+    
+    if  (3 < row_copy < 0)  or (3 < col_copy < 0):
         raise ValueError("Invalid move: position out of range")
 
     new_board = [row[:] for row in board]

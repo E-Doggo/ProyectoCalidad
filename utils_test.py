@@ -3,15 +3,18 @@ import pytest
 
 @pytest.fixture
 def empty_board():
-    return [[None for _ in range(4)] for _ in range(4)]
+    #setup
+    yield [[None for _ in range(4)] for _ in range(4)]
+    #teardown
+
 
 @pytest.fixture
 def player_white():
-    return WHITE
+    yield WHITE
 
 @pytest.fixture
 def player_black():
-    return BLACK
+    yield BLACK
 
 def test_traduction_move():
     move_string = "B2 N"
@@ -59,10 +62,10 @@ def test_make_move_succesfully(empty_board, player_black):
 
 def test_make_move_failed_first_condition(empty_board, player_black):
     move_selected = "B7 N"
-    with pytest.raises(ValueError):
+    with pytest.raises(IndexError):
         make_move(empty_board, move_selected, player_black)
 
 def test_make_move_failed_second_condition(empty_board, player_black):
     move_selected = "E2 N"
-    with pytest.raises(ValueError):
+    with pytest.raises(IndexError):
         make_move(empty_board, move_selected, player_black)

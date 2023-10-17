@@ -4,12 +4,12 @@ Contributors:
 - Sergio Bustamante Jaldin
 
 Dependencias:
-  pip install pytest
-  pip install coverage.py
+  - pip install pytest
+  - pip install coverage.py
   
 
 Comandos necesarios:
 Ejecucion tests:
-  coverage pytest -m "./filename" 
+  - coverage pytest -m "./filename" 
 Ejecucion reporte
-  coverage report
+  - coverage report

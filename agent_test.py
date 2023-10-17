@@ -34,3 +34,9 @@ def test_terminal_test_square_winner(empty_board, player_white, player_black):
     board[1][0] = player_black
     board[1][1] = player_black
     assert terminal_test(board, player_black) == True
+
+def test_terminal_test_no_winner(empty_board, player_white, player_black):
+    board = empty_board
+    # No hay ganador en este tablerocov
+    assert terminal_test(board, player_black) == False
+

@@ -40,3 +40,8 @@ def test_terminal_test_no_winner(empty_board, player_white, player_black):
     # No hay ganador en este tablerocov
     assert terminal_test(board, player_black) == False
 
+def test_find_adjacencies_case1(empty_board, player_white, player_black):
+    # Caso de prueba para el camino 1: Inicio -> Fin
+    board = empty_board
+    result = find_adjacencies(board)
+    assert result == (0, 0)

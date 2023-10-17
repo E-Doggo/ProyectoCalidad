@@ -73,3 +73,9 @@ def test_second_evaluation_function(empty_board, player_white, player_black):
     state = (board,)
     result = second_evaluation_function(state)
     assert result == -40  
+
+def test_get_all_moves_case1(empty_board, player_white, player_black):
+    # Caso de prueba para el camino 1: Inicio -> Fin
+    board = empty_board
+    result = get_all_moves(board, player_black)
+    assert result == []

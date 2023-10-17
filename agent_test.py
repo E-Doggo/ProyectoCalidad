@@ -45,3 +45,19 @@ def test_find_adjacencies_case1(empty_board, player_white, player_black):
     board = empty_board
     result = find_adjacencies(board)
     assert result == (0, 0)
+
+def test_find_adjacencies_case2(empty_board, player_white, player_black):
+    # Caso de prueba para el camino 2: Inicio -> i loop -> Fin
+    board = empty_board
+    # Configura un valor en el tablero para activar el bucle i
+    board[0][0] = player_white
+    result = find_adjacencies(board)
+    assert result == (0, -3)
+def test_find_adjacencies_case3(empty_board, player_white, player_black):
+    # Caso de prueba para el camino 3: Inicio -> i loop -> j loop -> Fin
+    board = empty_board
+    # Configura un valor en el tablero para activar ambos bucles i y j
+    board[0][0] = player_white
+    board[1][1] = player_black
+    result = find_adjacencies(board)
+    assert result == (8, -3)

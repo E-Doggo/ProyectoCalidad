@@ -116,3 +116,16 @@ def test_first_evaluation_function_case1(empty_board, player_white, player_black
     state = (board,)
     result = first_evaluation_function(state)
     assert result == 0 
+
+def test_alpha_beta_prunning_depth_case1_and_2(empty_board, player_white, player_black):
+    # Caminos 1 y 2: Inicio -> Terminación (depth == 0) o Iteración sobre los movimientos -> Terminación (depth == 0)
+    state = (empty_board, player_black)
+    depth = 0
+    alpha = float('-inf')
+    beta = float('inf')
+    maximizing_player = True
+    available_moves = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2)]
+    counter = 0
+    eva_type = 1  # o el tipo que estés usando
+    result = alpha_beta_prunning_depth(state, depth, alpha, beta, maximizing_player, available_moves, counter, eva_type)
+    assert result == (0.0,0, 1)  # Puedes ajustar el valor esperado según tus necesidades

@@ -79,3 +79,27 @@ def test_get_all_moves_case1(empty_board, player_white, player_black):
     board = empty_board
     result = get_all_moves(board, player_black)
     assert result == []
+
+def test_get_all_moves_case2(empty_board, player_white, player_black):
+    # Caso de prueba para el camino 2: Inicio -> i loop -> Fin
+    board = empty_board
+    result = get_all_moves(board, player_black)
+    expected_result = [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3), (3, 0), (3, 1), (3, 2), (3, 3)]
+    expected_result = [cell for cell in expected_result if board[cell[0]][cell[1]] == EMPTY]
+
+    assert result == expected_result
+
+def test_get_all_moves_case3(empty_board, player_white, player_black):
+    # Caso de prueba para el camino 3: Inicio -> i loop -> j loop -> Comprobación si la casilla está vacía -> Comprobación si el movimiento crea una línea ganadora -> Agregar el movimiento a la lista de movimientos disponibles -> Fin del bucle interno (j loop) -> Fin del bucle externo (i loop)
+    board = [
+        [player_black, None, player_white, None],
+        [player_white, player_black, player_black, None],
+        [player_black, player_white, None, None],
+        [None, None, None, None]
+    ]
+    result = get_all_moves(board, player_black)
+    expected_result = []
+
+    assert result == expected_result
+
+

@@ -196,3 +196,41 @@ def test_get_computer_move_no_parameters():
     
     with pytest.raises(TypeError):
         get_computer_move()
+
+
+def test_get_computer_nocutoff_move(create_state_white):
+    state = create_state_white
+    with pytest.raises(RecursionError):
+        get_computer_move_no_cutoff(state)
+
+
+def test_get_computer_move_nocutoff_no_moves():
+    board = [['B','B','B',None],['B','W', 'B', None],['B', 'B', 'B', None],[None, None, None, None]]
+    state = [board, WHITE]
+    
+    result = get_computer_move_no_cutoff(state)
+
+    assert result == None
+
+
+
+def test_get_computer_move_nocutoff_no_players(create_state_with_empty_board):
+    state = create_state_with_empty_board
+    
+    result = get_computer_move_no_cutoff(state)
+
+    assert result == None
+
+
+
+def test_get_computer_move_nocutoff_void_board():
+    state = [[],WHITE]
+    
+    with pytest.raises(IndexError):
+        get_computer_move_no_cutoff(state)
+
+
+def test_get_computer_move_nocutoff_no_parameters():
+    
+    with pytest.raises(TypeError):
+        get_computer_move_no_cutoff()

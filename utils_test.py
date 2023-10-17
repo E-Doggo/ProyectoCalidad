@@ -216,12 +216,6 @@ def test_west_failed_first_condition():
 
 
 
-
-
-
-
-
-
 def test_move_east_fails():
     row_copy=-100
     col_copy=-100
@@ -251,3 +245,27 @@ def test_east_failed_first_condition():
     new_board=([None, 'B', None, None], [[None, None, None, None]], [[None, None, None, None]], ['B', 'B', None, None])
     resulting_board = move_east(new_board, row_copy, col_copy, previous_position, player)
     assert resulting_board == ([None, 'B', None, None], [[None, None, None, None]], [[None, None, None, None]], ['B', 'B', None, None])
+    
+
+
+
+
+
+
+
+
+def test_move_southwest_fails():
+    row_copy=-100
+    col_copy=-100
+    new_board=[None, None, None, None], [None, None, None, None], [None, None, None, None], [None, None, None, None]
+    previous_position=0
+    resulting_board = move_southwest(new_board, row_copy, col_copy, previous_position, player)
+    assert resulting_board == ([None, None, None, None], [None, None, None, None], [None, None, None, None], [None, None, None, None])
+
+def test_southwest_all_true():
+    row_copy=4
+    col_copy=1
+    new_board=[None,  None, None, None], [['B', None, None, None]], [[None, None, None, None]], [None, None, None, None ]
+    resulting_board = move_southwest(new_board, row_copy, col_copy, previous_position, player)
+    assert resulting_board == ([None,  None, None, None], [['B', None, None, None]], [[None, None, None, None]], [None, None, None, None])
+

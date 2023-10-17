@@ -153,8 +153,10 @@ def play_game():
     human_player = None
     while human_player not in [BLACK, WHITE]:
         try:
-            human_player = input(
-                "Choose your color ('B' for Black, 'W' for White): ").upper()
+            human_input = input("Choose your color ('B' for Black, 'W' for White): ").upper()
+            if human_input not in [BLACK, WHITE]:
+                raise ValueError("Invalid color choice.")
+            human_player = human_input
         except ValueError:
             print('Invalid input. Please try again.')
     player = WHITE  # set player to always be black
@@ -182,46 +184,6 @@ def play_game():
     print('Game over! Winner: ', get_opponent(player))
 
 
-def play_game_no_cutoff():
-    board = create_board()
-    display_board(board)
-
-    human_player = None
-    while human_player not in [BLACK, WHITE]:
-        try:
-            human_player = input(
-                "Choose your color ('B' for Black, 'W' for White): ").upper()
-        except ValueError:
-            print('Invalid input. Please try again.')
-
-    if human_player == BLACK:
-        computer_player = WHITE
-    else:
-        computer_player = BLACK
-
-    player = computer_player  # set player to always be black
-    state = (board, player)
-
-    while not check_win(board, BLACK) and not check_win(board, WHITE):
-        mov_valido = False
-        if player == human_player:
-            while (mov_valido == False):
-                mov_valido, move = get_user_move(state)
-        else:
-            move = get_computer_move_no_cutoff(state)
-            print("Computer's move: ", move)
-
-        try:
-            board = make_move(board, move, player)
-
-            state = (board, get_opponent(player))
-            display_board(board)
-        except ValueError as e:
-            print(e)
-
-        player = get_opponent(player)
-
-    print('Game over! Winner: ', get_opponent(player))
 
 
 if __name__ == "__main__":

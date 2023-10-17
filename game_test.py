@@ -1,5 +1,7 @@
 from game import *
 import pytest
+from unittest.mock import patch
+
 
 @pytest.fixture
 def empty_board():
@@ -53,17 +55,22 @@ def test_check_win_2(empty_board):
     result = check_win(board, BLACK)
     assert result == True
 
-def test_check_win_3(empty_board):
-    board = empty_board
-    board [0][0] = BLACK
-    board [0][3] = BLACK  
-    board [3][0] = BLACK
-    board [3][3] = BLACK
-    result = check_win(board, BLACK)
-    assert result == True
+test_data = [
+    (True, [[BLACK, None, None, BLACK], [None, None, None, None], [None, None, None, None], [BLACK, None, None, BLACK]]),
+    (False, [[BLACK, None, None, BLACK], [None, None, None, None], [None, None, None, None], [BLACK, None, None, WHITE]]),
+    (False, [[BLACK, None, None, BLACK], [None, None, None, None], [None, None, None, None], [WHITE, None, None, BLACK]]),
+    (False, [[BLACK, None, None, WHITE], [None, None, None, None], [None, None, None, None], [BLACK, None, None, BLACK]]),
+    (False, [[WHITE, None, None, BLACK], [None, None, None, None], [None, None, None, None], [BLACK, None, None, BLACK]]),
+]
+
+@pytest.mark.parametrize("expected_result, board", test_data)
+def test_check_win(empty_board, expected_result, board):
+    empty_board[:] = board
+    result = check_win(empty_board, BLACK)
+    assert result == expected_result
 
 
-def test_check_win_4(empty_board):
+def test_check_win_8(empty_board):
     board = empty_board
     result = check_win(board, BLACK)
     assert result == False
@@ -234,3 +241,30 @@ def test_get_computer_move_nocutoff_no_parameters():
     
     with pytest.raises(TypeError):
         get_computer_move_no_cutoff()
+
+
+
+def custom_input(prompt):
+    try:
+        return next(custom_input.iterator)
+    except StopIteration:
+        raise StopIteration("No more input values provided")
+
+custom_input.iterator = iter([])
+
+@pytest.mark.parametrize("user_input, moves, expected_winner", [
+    ("B\n", ['C1 N', 'B2 S', 'W3 E', 'C4 SW', 'W4 NE', 'B1 N', 'W2 S', 'C3 E', 'B4 SW', 'W1 N', 'C2 S', 'B3 E', 'W1 N'], "BLACK"),
+    ("W\n", ['B1 N', 'W2 S', 'C3 E', 'B4 SW', 'W1 N', 'C2 S', 'B3 E', 'W1 N', 'C1 N', 'B2 S', 'W3 E', 'C4 SW', 'B1 N'], "WHITE"),
+])
+def test_play_game(user_input, moves, expected_winner, capsys):
+    # Use the custom_input function for input
+    custom_input.iterator = iter(user_input.split('\n')[:-1])
+
+    # Set up the sequences of moves
+    moves_input = '\n'.join(moves)
+
+    # Capture the standard output
+    with patch('builtins.input', custom_input):
+        with patch('builtins.print') as mock_print:
+            with pytest.raises(StopIteration):
+                play_game()

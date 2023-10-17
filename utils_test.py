@@ -229,25 +229,25 @@ def test_move_east_fails():
     previous_position=0
     with pytest.raises(IndexError):
         move_east(new_board, row_copy, col_copy, previous_position, player)
-def test_west_all_true():
+
+def test_east_all_true():
     row_copy=1
-    col_copy=1
+    col_copy=4
     new_board=[None,  None, None, None], [['B', None, None, None]], [[None, None, None, None]], [None, None, None, None ]
-    resulting_board = move_west(new_board, row_copy, col_copy, previous_position, player)
+    resulting_board = move_east(new_board, row_copy, col_copy, previous_position, player)
     assert resulting_board == ([None,  None, None, None], [['B', None, None, None]], [[None, None, None, None]], [None, None, None, None])
 
-def test_west_failed_second_condition():
-    row_copy=1
-    col_copy=1
+def test_east_failed_second_condition():
+
+    col_copy=3
     player=WHITE
     new_board=['W',  'B', None, None], [[None, None, None, None]], [[None, None, None, None]], [None, None, None, None ]
-    resulting_board = move_west(new_board, row_copy, col_copy, previous_position, player)
+    resulting_board = move_east(new_board, row_copy, col_copy, previous_position, player)
     assert resulting_board == (['W', 'B', None, None], [[None, None, None, None]], [[None, None, None, None]], [None, None, None, None])
 
-def test_west_failed_first_condition():
+def test_east_failed_first_condition():
     row_copy = 3
     col_copy = -1
-    player = WHITE
-    new_board=([None, 'B', None, None], [[None, None, None, None]], [[None, None, None, None]], [None, None, None, None])
-    resulting_board = move_west(new_board, row_copy, col_copy, previous_position, player)
-    assert resulting_board == ([None, 'B', None, None], [[None, None, None, None]], [[None, None, None, None]], [None, None, None, None])
+    new_board=([None, 'B', None, None], [[None, None, None, None]], [[None, None, None, None]], ['B', 'B', None, None])
+    resulting_board = move_east(new_board, row_copy, col_copy, previous_position, player)
+    assert resulting_board == ([None, 'B', None, None], [[None, None, None, None]], [[None, None, None, None]], ['B', 'B', None, None])

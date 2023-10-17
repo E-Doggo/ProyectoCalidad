@@ -35,6 +35,13 @@ def test_terminal_test_square_winner(empty_board, player_white, player_black):
     board[1][1] = player_black
     assert terminal_test(board, player_black) == True
 
+def test_terminal_test_diagonal_nowinner(empty_board, player_white, player_black):
+    board = empty_board
+    # Configura un ganador en la diagonal
+    for i in range(4):
+        board[i][i] = player_white
+    assert terminal_test(board, player_white) == False
+
 def test_terminal_test_no_winner(empty_board, player_white, player_black):
     board = empty_board
     # No hay ganador en este tablerocov
@@ -103,3 +110,9 @@ def test_get_all_moves_case3(empty_board, player_white, player_black):
     assert result == expected_result
 
 
+def test_first_evaluation_function_case1(empty_board, player_white, player_black):
+    # Caminos 1, 2, 3, 4, 5, 6, 7: Inicio -> Fin
+    board = empty_board
+    state = (board,)
+    result = first_evaluation_function(state)
+    assert result == 0 

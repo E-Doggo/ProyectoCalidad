@@ -142,9 +142,3 @@ def alpha_beta_prunning_depth(state, depth, alpha, beta, maximizing_player, avai
         if beta <= alpha:
                 break
     return val, best_move, counter
-def test_first_evaluation_function_case1(empty_board, player_white, player_black):
-    # Caminos 1, 2, 3, 4, 5, 6, 7: Inicio -> Fin
-    board = empty_board
-    state = (board,)
-    result = first_evaluation_function(state)
-    assert result == 0  # Puedes ajustar el valor esperado según tus necesidades

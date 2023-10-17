@@ -25,3 +25,12 @@ def test_terminal_test_vertical_winner(empty_board, player_white, player_black):
     for i in range(4):
         board[i][0] = player_black
     assert terminal_test(board, player_black) == True
+
+def test_terminal_test_square_winner(empty_board, player_white, player_black):
+    board = empty_board
+    # Configura un ganador en un cuadrado
+    board[0][0] = player_black
+    board[0][1] = player_black
+    board[1][0] = player_black
+    board[1][1] = player_black
+    assert terminal_test(board, player_black) == True

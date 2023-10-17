@@ -61,3 +61,15 @@ def test_find_adjacencies_case3(empty_board, player_white, player_black):
     board[1][1] = player_black
     result = find_adjacencies(board)
     assert result == (8, -3)
+
+def test_second_evaluation_function(empty_board, player_white, player_black):
+    # Caso de prueba para cubrir el flujo básico de la función
+    board = [
+        [player_black, player_white, player_white, player_black],
+        [player_white, player_black, player_black, player_white],
+        [player_black, player_white, player_black, player_white],
+        [player_white, player_black, player_white, player_black]
+    ]
+    state = (board,)
+    result = second_evaluation_function(state)
+    assert result == -40  

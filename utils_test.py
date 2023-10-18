@@ -14,7 +14,7 @@ def player_white():
 
 @pytest.fixture
 def player_black():
-    return BLACK
+    yield BLACK
 
 @pytest.fixture
 def row_copy():
@@ -82,12 +82,12 @@ def test_make_move_succesfully(empty_board, player_black):
 
 def test_make_move_failed_first_condition(empty_board, player_black):
     move_selected = "B7 N"
-    with pytest.raises(IndexError):
+    with pytest.raises(ValueError):
         make_move(empty_board, move_selected, player_black)
 
 def test_make_move_failed_second_condition(empty_board, player_black):
     move_selected = "E2 N"
-    with pytest.raises(IndexError):
+    with pytest.raises(ValueError):
         make_move(empty_board, move_selected, player_black)
 
 

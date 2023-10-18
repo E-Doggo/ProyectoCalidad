@@ -129,41 +129,36 @@ def test_is_possible_move_false_4(create_state_black):
     result = is_possible_move(direction, row, column, state[0], state[1])
     assert result == False
 
-def test_get_user_move_valid_move(create_state_black, capsys, monkeypatch):
+valid_moves = [
+    ("A1 S", (True, "A1 S")),
+]
+
+invalid_moves = [
+    ("A2 E", (False, 0)),
+    ("D1 S", (False, 0)),
+]
+
+@pytest.mark.parametrize("user_input, expected_result", valid_moves)
+def test_get_user_move_valid_move(create_state_black, capsys, monkeypatch, user_input, expected_result):
     state = create_state_black
-
-    user_input = "A1 S"
-
-    monkeypatch.setattr('builtins.input', lambda _: user_input)
-
-    with capsys.disabled():
-        result = get_user_move(state)
-
-    assert result == (True, 'A1 S')
-
-def test_get_user_move_invalid_move(create_state_black, capsys, monkeypatch):
-    state = create_state_black
-
-    user_input = "A2 E"
-
     monkeypatch.setattr('builtins.input', lambda _: user_input)
     
     with capsys.disabled():
         result = get_user_move(state)
+    
+    assert result == expected_result
 
-    assert result == (False, 0)
-
-def test_get_user_move_wrong_piece(create_state_black, capsys, monkeypatch):
+@pytest.mark.parametrize("user_input, expected_result", invalid_moves)
+def test_get_user_move_invalid_move(create_state_black, capsys, monkeypatch, user_input, expected_result):
     state = create_state_black
-
-    user_input = "D1 S"
-
     monkeypatch.setattr('builtins.input', lambda _: user_input)
     
     with capsys.disabled():
         result = get_user_move(state)
+    
+    assert result == expected_result
 
-    assert result == (False, 0)  
+
 
 def test_get_computer_move(create_state_white):
     state = create_state_white
@@ -171,7 +166,6 @@ def test_get_computer_move(create_state_white):
     result = get_computer_move(state, 1)
 
     assert result == 'D1 S'
-
 
 def test_get_computer_move_no_moves():
     board = [['B','B','B',None],['B','W', 'B', None],['B', 'B', 'B', None],[None, None, None, None]]
@@ -182,15 +176,13 @@ def test_get_computer_move_no_moves():
     assert result == None
 
 
-
 def test_get_computer_move_no_players(create_state_with_empty_board):
     state = create_state_with_empty_board
     
     result = get_computer_move(state, 1)
 
     assert result == None
-
-
+ 
 
 def test_get_computer_move_void_board():
     state = [[],WHITE]

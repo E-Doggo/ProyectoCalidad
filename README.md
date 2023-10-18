@@ -9,8 +9,8 @@ Dependencias:
   
 
 Comandos necesarios:
-Ejecucion tests:
-  - coverage run -m pytest .\game_test.py   
-  - coverage run -m pytest
-Ejecucion reporte:
-  - coverage report
+- Ejecucion tests:
+    - coverage run -m pytest .\game_test.py   
+    - coverage run -m pytest
+- Ejecucion reporte:
+    - coverage report
